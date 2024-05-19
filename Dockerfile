@@ -1,4 +1,4 @@
-FROM node:21.7.3-bullseye as build
+FROM node:21 as build
 
 WORKDIR /usr/bin/app
 
@@ -9,7 +9,6 @@ RUN npm i
 COPY . .
 
 RUN npm run build
-
 
 FROM nginx:stable-alpine
 

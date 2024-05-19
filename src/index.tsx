@@ -17,7 +17,7 @@ const router = createBrowserRouter([
             {
                 path: ":tableName",
                 loader: async ({ params, request }) => {
-                    const data = await fetch("/api/" + params.tableName + "/")
+                    const data = await fetch("http://localhost:5000/" + params.tableName + "/")
                     return (await data.json()).results
                 },
                 element: <List/>,
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
                     {
                         path: ":id",
                         loader: async ({ params, request }) => {
-                            const data = await fetch("/api/" + params.tableName + "/" + params.id + "/")
+                            const data = await fetch("http://localhost:5000/" + params.tableName + "/" + params.id + "/")
                             return await data.json()
                         },
                         element: <Edit/>

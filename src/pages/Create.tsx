@@ -12,7 +12,7 @@ export default function Create() {
     const create = async (e: FormEvent) => {
         e.preventDefault()
         const formData = new FormData(e.target as HTMLFormElement)
-        await fetch("/api/" + target + "/", { method: "POST", body: returnBodyFromFormData(formData), headers: {
+        await fetch("http://localhost:5000/" + target + "/", { method: "POST", body: returnBodyFromFormData(formData), headers: {
             "Content-Type": "application/json",
         },})
         navigate("..")

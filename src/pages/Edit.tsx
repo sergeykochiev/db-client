@@ -25,7 +25,7 @@ function InnerEdit<T extends (Teacher & Student & Subject & Class & TeacherClass
     const navigate = useNavigate()
     const updateData = async (e: FormEvent) => {
         const formData = new FormData(e.target as HTMLFormElement)
-        await fetch("/api/" + location.pathname + "/", { method: "PATCH", body: returnBodyFromFormData(formData), headers: {
+        await fetch("http://localhost:5000/" + location.pathname + "/", { method: "PATCH", body: returnBodyFromFormData(formData), headers: {
             "Content-Type": "application/json",
         }})
         navigate("..")
