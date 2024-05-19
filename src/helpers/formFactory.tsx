@@ -47,7 +47,7 @@ export default function formFactory(table: string): [(e: FormData) => string, ((
             <InputLabel label="Дата рождения">
                 <TextInput type='date' required placeholder='Дата рождения' name='birth_date' defaultValue={e && e.birth_date}/>
             </InputLabel>
-            <TextInput type='text' required placeholder='Адресс' name='address' defaultValue={e && e.address}/>
+            <TextInput type='text' required placeholder='Адрес' name='address' defaultValue={e && e.address}/>
             <TextInput type='text' required placeholder='Телефон' name='phone_number' defaultValue={e && e.phone_number}/>
             <TextInput type='number' required placeholder='Оценка' name='grade' defaultValue={e && e.grade}/>
             <InputLabel label="Дата оценки">
