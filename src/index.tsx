@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Main from './pages/Main';
-import List from './pages/List';
-import Entity from './pages/Edit';
-import Create from './pages/Create';
+import Table from './pages/Table';
 import Edit from './pages/Edit';
+import Create from './pages/Create';
 
 const router = createBrowserRouter([
     {
@@ -17,15 +15,15 @@ const router = createBrowserRouter([
             {
                 path: ":tableName",
                 loader: async ({ params, request }) => {
-                    const data = await fetch("http://localhost:5000/" + params.tableName + "/")
+                    const data = await fetch("/api/" + params.tableName + "/")
                     return (await data.json()).results
                 },
-                element: <List/>,
+                element: <Table/>,
                 children: [
                     {
                         path: ":id",
                         loader: async ({ params, request }) => {
-                            const data = await fetch("http://localhost:5000/" + params.tableName + "/" + params.id + "/")
+                            const data = await fetch("/api/" + params.tableName + "/" + params.id + "/")
                             return await data.json()
                         },
                         element: <Edit/>
@@ -47,8 +45,3 @@ root.render(
         <RouterProvider router={router}/>
     </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
