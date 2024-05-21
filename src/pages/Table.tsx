@@ -16,7 +16,7 @@ export default function Table() {
         fetchData()
     }, [])
     const changeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        if (Number(e.target.value) == -1) {
+        if (Number(e.target.value) === -1) {
             navigate("/client/create")
         }
         navigate("/client/" + e.target.value)
