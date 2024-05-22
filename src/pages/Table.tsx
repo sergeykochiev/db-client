@@ -22,7 +22,7 @@ export default function Table() {
         navigate("/client/" + e.target.value)
     }
     return (
-        <div className='rounded-4 bg-gray-200 p-6'>
+        <div className='rounded-4 bg-gray-200 p-6 flex flex-col gap-4'>
             <Select onChange={changeHandler}>
                 <option selected value="-1">Создать</option>
                 {data.map(e => <option selected value={e.id}>{AnyTable[pathname]} {e.id}</option>)}

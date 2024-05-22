@@ -17,12 +17,11 @@ export default function Edit() {
     const create = async (e: FormEvent) => {
         e.preventDefault()
         const fd = new FormData(e.target as HTMLFormElement)
-        await fetchApi("UPDATE", table, getBody(fd))
+        await fetchApi("UPDATE", table + "/" + data.id, getBody(fd))
         navigate("..")
     }
     return (
         <Form onSubmit={create}>
-            <input className="hidden" type="number" name="id" readOnly value={data.id}/>
             {getFields(table)}
             <Button>Создать</Button>
         </Form>

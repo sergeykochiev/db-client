@@ -8,7 +8,7 @@ interface VariantInputProps {
 
 export default function VariantInput(p: VariantInputProps) {
   return (
-    <div className='flex justify-between items-center'>
+    <div className='transition-all flex justify-between items-center p-2 px-4 bg-white rounded-xl outline outline-2 -outline-offset-2 outline-transparent hover:outline-blue-400'>
         {p.label}
         <div className='flex gap-8 items-center'>
             <label className='flex gap-4 items-center'>
