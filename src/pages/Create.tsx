@@ -1,25 +1,25 @@
-import { FormEvent, useState } from "react"
+import { FormEvent } from "react"
 import Form from "../components/Form"
 import Button from "../components/Button"
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom"
-import fetchApi from "../helpers/fetchApi"
-import getBody from "../helpers/getBody"
-import getFields from "../helpers/getFields"
-import { AnyTableKey } from "../types"
+import { useLocation, useNavigate } from "react-router-dom"
+import { Table, TableEnum, getFormData, getFormFields } from "../shared"
+import Main from "../components/Main"
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 export default function Create() {
     const navigate = useNavigate()
-    const table = useLocation().pathname.split("/")[1] as AnyTableKey
+    const table = useLocation().pathname.split("/")[1] as Table
     const create = async (e: FormEvent) => {
         e.preventDefault()
         const fd = new FormData(e.target as HTMLFormElement)
-        await fetchApi("POST", table, getBody(fd))
+        await fetch("/api/" + table + "/create/", { method: "POST", body: JSON.stringify(getFormData(fd))})
         navigate("..")
     }
-    return (
+    return <Main heading={"Создать " + TableEnum[table]}>
+        <Button onClick={() => navigate("..")}><IoMdArrowRoundBack/></Button>
         <Form onSubmit={create}>
-            {getFields(table)}
-            <Button>Создать</Button>
+            {getFormFields(table)}
+            <Button stretched>Создать</Button>
         </Form>
-    )
+    </Main>
 }
