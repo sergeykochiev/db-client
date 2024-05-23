@@ -15,18 +15,16 @@ const router = createBrowserRouter([
             {
                 path: ":tableName",
                 loader: async ({ params, request }) => {
-                    // const data = await fetch("/api/" + params.tableName + "/")
-                    // return (await data.json()).results
-                    return []
+                    const data = await fetch("/api/" + params.tableName + "/")
+                    return (await data.json()).results
                 },
                 element: <Table/>,
                 children: [
                     {
                         path: ":id",
                         loader: async ({ params, request }) => {
-                            // const data = await fetch("/api/" + params.tableName + "/" + params.id + "/")
-                            // return await data.json()
-                            return {}
+                            const data = await fetch("/api/" + params.tableName + "/" + params.id + "/")
+                            return await data.json()
                         },
                         element: <Edit/>
                     },

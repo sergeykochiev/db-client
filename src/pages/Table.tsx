@@ -1,20 +1,13 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import fetchApi from '../helpers/fetchApi'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-dom'
 import Select from '../components/Select'
 import { AnyTable, AnyTableKey, ModelUnion } from '../types'
 
 export default function Table() {
-    const [data, setData] = useState<ModelUnion[]>([])
+    const data: ModelUnion[] = useLoaderData() as ModelUnion[]
     const navigate = useNavigate()
     const pathname = useLocation().pathname.split("/")[1] as AnyTableKey
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await fetchApi("GET", "client")
-            setData(data.results)
-        }
-        fetchData()
-    }, [])
     const changeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
         if (Number(e.target.value) === -1) {
             navigate("/client/create")
