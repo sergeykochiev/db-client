@@ -2,7 +2,7 @@ import Select from "../components/Select";
 import TextInput from "../components/TextInput";
 import VariantInput from "../components/VariantInput";
 import Category, { CategoryKey } from "../model/Category";
-import { AnyModel, AnyTable, AnyTableKey, ModelUnion } from "../types";
+import { AnyTableKey, ModelUnion } from "../types";
 
 export default function getFields(table: AnyTableKey, init?: ModelUnion) {
     const get = (field: keyof ModelUnion): string | undefined => init && init[field] as string
@@ -12,7 +12,7 @@ export default function getFields(table: AnyTableKey, init?: ModelUnion) {
                 <TextInput required name="fio" type="text" placeholder="ФИО" defaultValue={get("fio")}/>
                 <TextInput required name="phone_number" type="tel" placeholder="Номер" defaultValue={get("phone_number")}/>
                 <Select defaultValue={get("category")} name="category">
-                    {Object.keys(Category).map(key => <option value={key}>{Category[key as CategoryKey]}</option>)}
+                    {Object.keys(Category).map(key => <option key={key} value={key}>{Category[key as CategoryKey]}</option>)}
                 </Select>
                 <TextInput required name="email" type="email" placeholder="Эл. почта" defaultValue={get("email")}/>
             </>
