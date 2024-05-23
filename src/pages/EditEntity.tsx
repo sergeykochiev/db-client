@@ -13,7 +13,7 @@ export default function EditEntity() {
     const update = async (e: FormEvent) => {
         e.preventDefault()
         const fd = new FormData(e.target as HTMLFormElement)
-        await fetch("/api/" + table + "/edit/" + data.id + "/", { method: "UPDATE", body: JSON.stringify(getFormData(fd)) })
+        await fetch("http://localhost:5152/" + table + "/edit/" + data.id + "/", { method: "UPDATE", body: JSON.stringify(getFormData(fd)) })
         navigate("..")
     }
     return <Main heading={TableEnum[table] + " с ID " + data.id}>

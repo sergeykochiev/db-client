@@ -17,8 +17,8 @@ const router = createBrowserRouter([
     {
         path: ":tableName",
         loader: async ({ params, request }) => {
-            // const data = await fetch("/api/" + params.tableName + "/")
-            // return (await data.json()).results
+            const data = await fetch("http://localhost:5152/" + params.tableName + "/")
+            return (await data.json()).results
             return []
         },
         element: <Entities/>,
@@ -26,8 +26,8 @@ const router = createBrowserRouter([
     {
         path: ":tableName/:id",
         loader: async ({ params, request }) => {
-            // const data = await fetch("/api/" + params.tableName + "/" + params.id + "/")
-            // return await data.json()
+            const data = await fetch("http://localhost:5152/" + params.tableName + "/" + params.id + "/")
+            return await data.json()
             return {}
         },
         element: <EditEntity/>

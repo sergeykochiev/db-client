@@ -12,7 +12,7 @@ export default function Create() {
     const create = async (e: FormEvent) => {
         e.preventDefault()
         const fd = new FormData(e.target as HTMLFormElement)
-        await fetch("/api/" + table + "/create/", { method: "POST", body: JSON.stringify(getFormData(fd))})
+        await fetch("http://localhost:5152/" + table + "/create/", { method: "POST", body: JSON.stringify(getFormData(fd))})
         navigate("..")
     }
     return <Main heading={"Создать " + TableEnum[table]}>
