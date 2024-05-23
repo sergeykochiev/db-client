@@ -7,18 +7,12 @@ import { AnyTable, AnyTableKey, ModelUnion } from '../types'
 export default function Table() {
     const data: ModelUnion[] = useLoaderData() as ModelUnion[]
     const navigate = useNavigate()
-    const pathname = useLocation().pathname.split("/")[1] as AnyTableKey
-    const changeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        if (Number(e.target.value) === -1) {
-            navigate("/client/create")
-        }
-        navigate("/client/" + e.target.value)
-    }
+    const path = useLocation().pathname.split("/")
     return (
         <div className='rounded-4 bg-gray-200 p-6 flex flex-col gap-4'>
-            <Select onChange={changeHandler}>
-                <option selected value="-1">Создать</option>
-                {data.map(e => <option selected value={e.id}>{AnyTable[pathname]} {e.id}</option>)}
+            <Select onChange={(e: ChangeEvent<HTMLSelectElement>) => navigate("/" + path[1] + "/" + e.target.value)}>
+                <option selected default value="create">Создать</option>
+                {data.map(e => <option selected value={e.id}>{AnyTable[path[1] as AnyTableKey]} {e.id}</option>)}
             </Select>
             <Outlet/>
         </div>

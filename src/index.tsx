@@ -29,7 +29,7 @@ const router = createBrowserRouter([
                         element: <Edit/>
                     },
                     {
-                        path: "",
+                        path: "create",
                         element: <Create/>
                     },
                 ]

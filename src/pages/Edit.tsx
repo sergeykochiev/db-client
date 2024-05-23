@@ -12,6 +12,11 @@ import { AnyTableKey, ModelUnion } from "../types"
 
 export default function Edit() {
     const data: ModelUnion = useLoaderData() as ModelUnion
+    return <InnerEdit key={data.id}/>
+}
+
+function InnerEdit() {
+    const data: ModelUnion = useLoaderData() as ModelUnion
     const navigate = useNavigate()
     const table = useLocation().pathname.split("/")[1] as AnyTableKey
     const create = async (e: FormEvent) => {
@@ -22,7 +27,7 @@ export default function Edit() {
     }
     return (
         <Form onSubmit={create}>
-            {getFields(table)}
+            {getFields(table, data)}
             <Button>Создать</Button>
         </Form>
     )

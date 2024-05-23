@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from 'react'
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  type?: "text" | "number" | "date" | "email" | "time"
+  type?: "text" | "number" | "date" | "email" | "time" | "tel"
 }
 
 export default function TextInput(p: TextInputProps) {
