@@ -11,7 +11,7 @@ export default function Table() {
     return (
         <div className='rounded-4 bg-gray-200 p-6 flex flex-col gap-4'>
             <Select onChange={(e: ChangeEvent<HTMLSelectElement>) => navigate("/" + path[1] + "/" + e.target.value)}>
-                <option selected default value="create">Создать</option>
+                <option selected value="create">Создать</option>
                 {data.map(e => <option selected value={e.id}>{AnyTable[path[1] as AnyTableKey]} {e.id}</option>)}
             </Select>
             <Outlet/>
