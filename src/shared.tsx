@@ -27,24 +27,24 @@ export function isTable<T>(e: any, f: keyof T): e is T { return f in e }
 export function getFormFields(t: Table, init?: Entity) {
     switch(t) {
         case "doctor": return <>
-            <Input type="text" name="name" placeholder="Имя" defaultValue={init && (init as Doctor).name}/>
-            <div className="font-bold text-blue-400">Специализация:</div>
+            <Input type="text" name="name" placeholder="Имя" required defaultValue={init && (init as Doctor).name}/>
+            <div className="font-bold text-fpurple">Специализация:</div>
             <div className="flex flex-wrap gap-2">
                 {Specialization.map((e, i) => <Checkbox key={e} name="specializations" value={i} label={e} defaultChecked={init && (init as Doctor).specializations.includes(i)}/>)}
             </div>
             
         </>
         case "diagnose": return <>
-            <Input type="text" name="body" placeholder="Содержание" defaultValue={init && (init as Diagnose).body}/>
-            <Input type="date" name="date" defaultValue={init && (init as Diagnose).date}/>
+            <Input type="text" name="body" placeholder="Содержание" required defaultValue={init && (init as Diagnose).body}/>
+            <Input type="date" name="date" required defaultValue={init && (init as Diagnose).date}/>
 
         </>
         case "docdiagnose": 
             return <>
             {/* <Input type="number" name="docId" placeholder="ID доктора" defaultValue={init && (init as DoctorDiagnose).docId}/>
             <Input type="number" name="diagId" placeholder="ID диагноза" defaultValue={init && (init as DoctorDiagnose).diagId}/> */}
-            <Select name="docId" table="doctor"/>
-            <Select name="diagId" table="diagnose"/>
+            <Select name="docId" table="doctor" required/>
+            <Select name="diagId" table="diagnose" required/>
         </>
     }
 }

@@ -14,7 +14,7 @@ export default function Main({ heading, init = false, ...props }: MainProps) {
         <div className='flex flex-col gap-6'>
             <div className='flex gap-6'>
                 {!init && <Button onClick={() => navigate(-1)}><IoMdArrowRoundBack size={20}/></Button>}
-                <div className='text-blue-400 text-3xl font-bold text-ellipsis'>{heading}</div>
+                <div className='text-fpurple text-3xl font-bold text-ellipsis'>{heading}</div>
             </div>
             <div className='w-[400px] flex flex-col gap-4' {...props}/>
         </div>

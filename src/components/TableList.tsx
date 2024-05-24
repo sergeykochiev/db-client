@@ -15,7 +15,7 @@ export default function TableList({ table, ...props }: TableListProps) {
         get()
     }, [])
     return (
-        <select className="transition-all w-full bg-slate-200 p-2 px-3 flex-1 rounded-full text-blue-400 focus:bg-fav font-bold outline outline-2 -outline-offset-2 hover:outline-blue-400 outline-transparent" {...props}>
+        <select className="transition-all w-full bg-fbeige p-2 px-3 flex-1 rounded-full text-fpurple focus:bg-fav font-bold outline outline-2 -outline-offset-2 hover:outline-fpurple outline-transparent" {...props}>
             {data && data.map(e => <option value={e.id}>{TableEnum[table]} с ID {e.id}</option>)}
         </select>
     )
