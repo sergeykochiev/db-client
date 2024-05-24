@@ -1,12 +1,22 @@
-import React, { HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
+import Button from './Button'
+import { IoMdArrowRoundBack } from 'react-icons/io'
+import { useNavigate } from 'react-router-dom'
 
 interface MainProps extends HTMLAttributes<HTMLElement> {
     heading: string
+    init?: boolean
 }
 
-export default function Main({ heading, ...props }: MainProps) {
-    return <main className='flex items-center justify-center flex-col gap-4 w-screen h-screen'>
-        <div className='text-blue-400 text-3xl font-bold'>{heading}</div>
-        <div className='w-[400px] h-[600px] p-8 rounded-3xl bg-gray-100 flex flex-col gap-4' {...props}/>
+export default function Main({ heading, init = false, ...props }: MainProps) {
+    const navigate = useNavigate()
+    return <main className='flex justify-center py-[10%] w-screen h-screen'>
+        <div className='flex flex-col gap-6'>
+            <div className='flex gap-6'>
+                {!init && <Button onClick={() => navigate(-1)}><IoMdArrowRoundBack size={20}/></Button>}
+                <div className='text-blue-400 text-3xl font-bold text-ellipsis'>{heading}</div>
+            </div>
+            <div className='w-[400px] flex flex-col gap-4' {...props}/>
+        </div>
     </main>
 }

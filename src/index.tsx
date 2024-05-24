@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Table from './pages/Entities';
-import Edit from './pages/EditEntity';
 import Init from './pages/Init';
 import Entities from './pages/Entities';
 import EditEntity from './pages/EditEntity';
@@ -17,24 +15,22 @@ const router = createBrowserRouter([
     {
         path: ":tableName",
         loader: async ({ params, request }) => {
-            const data = await fetch("http://localhost:5152/" + params.tableName + "/")
-            return (await data.json()).results
-            return []
+            const data = await fetch("http://localhost:5132/api/" + params.tableName + "s/")
+            return (await data.json()).result
         },
         element: <Entities/>,
     },
     {
-        path: ":tableName/:id",
-        loader: async ({ params, request }) => {
-            const data = await fetch("http://localhost:5152/" + params.tableName + "/" + params.id + "/")
-            return await data.json()
-            return {}
-        },
-        element: <EditEntity/>
-    },
-    {
         path: ":tableName/create",
         element: <Create/>
+    },
+    {
+        path: ":tableName/:id",
+        loader: async ({ params, request }) => {
+            const data = await fetch("http://localhost:5132/api/" + params.tableName + "s/id?id=" + params.id)
+            return (await data.json())
+        },
+        element: <EditEntity/>
     },
 ])
 const root = ReactDOM.createRoot(

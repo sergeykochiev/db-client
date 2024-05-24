@@ -1,4 +1,4 @@
-enum Specialization {
+const Specialization = [
     "Терапевт",
     "Педиатр",
     "Офтальмолог",
@@ -19,6 +19,6 @@ enum Specialization {
     "Психотерапевт",
     "Старшая медицинская сестра",
     "Медицинская сестра"
-}
+]
 
 export default Specialization

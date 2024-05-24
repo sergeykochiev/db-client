@@ -1,6 +1,5 @@
 export interface DoctorDiagnose {
     id: number
-    docID: number
-    diagID: number
-    Date: string
+    docId: number
+    diagId: number
 }

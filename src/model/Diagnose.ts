@@ -1,5 +1,5 @@
 export interface Diagnose {
     id: number
-    Code: string
-    Body: string
+    date: string
+    body: string
 }
