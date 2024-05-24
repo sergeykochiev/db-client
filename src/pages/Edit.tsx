@@ -20,7 +20,7 @@ function InnerEdit() {
     const edit = async (e: FormEvent) => {
         e.preventDefault()
         const fd = new FormData(e.target as HTMLFormElement)
-        const res = await fetchApi("UPDATE", table + "/" + data.id, getBody(fd))
+        const res = await fetchApi("PATCH", table + "/" + data.id, getBody(fd))
         if (!res.ok) {
             setError("Неверные данные")
             setTimeout(() => setError(""), 3000)
