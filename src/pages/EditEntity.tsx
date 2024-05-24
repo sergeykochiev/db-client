@@ -12,14 +12,23 @@ export default function EditEntity() {
     const update = async (e: FormEvent) => {
         e.preventDefault()
         const fd = new FormData(e.target as HTMLFormElement)
-        await fetch("http://localhost:5152/api/" + table + "s/id?id=" + data.id, { method: "PATCH", body: JSON.stringify(getFormData(fd)) })
-        navigate("..")
+        console.log(getFormData(fd))
+        await fetch("http://localhost:5132/api/" + table + "s/", { method: "PATCH", body: JSON.stringify(getFormData(fd)), headers: {
+            "Content-Type": "application/json"
+        }})
+        navigate(-1)
+    }
+    const remove = async () => {
+        await fetch("http://localhost:5132/api/" + table + "s/id?id=" + data.id, { method: "DELETE" })
+        navigate(-1)
     }
     return <Main heading={TableEnum[table] + " с ID " + data.id}>
         <Form onSubmit={update}>
+            <input name="id" value={data.id} className="hidden" type="number" readOnly/>
             {getFormFields(table, data)}
             <Button stretched>Изменить</Button>
         </Form>
+        <Button stretched onClick={remove}>Удалить</Button>
     </Main>
 }
 

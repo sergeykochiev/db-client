@@ -4,6 +4,7 @@ import { Doctor } from "./model/Doctor";
 import { DoctorDiagnose } from "./model/DoctorDiagnose";
 import Specialization from "./model/Specialization";
 import Checkbox from "./components/Checkbox";
+import Select from "./components/TableList";
 
 export enum TableEnum {
     "doctor" = "Доктор",
@@ -26,21 +27,24 @@ export function isTable<T>(e: any, f: keyof T): e is T { return f in e }
 export function getFormFields(t: Table, init?: Entity) {
     switch(t) {
         case "doctor": return <>
-            <Input type="text" name="Name" placeholder="Имя" defaultValue={init && (init as Doctor).name}/>
+            <Input type="text" name="name" placeholder="Имя" defaultValue={init && (init as Doctor).name}/>
             <div className="font-bold text-blue-400">Специализация:</div>
             <div className="flex flex-wrap gap-2">
-                {Specialization.map((e, i) => <Checkbox value={i} label={e} defaultChecked={init && (init as Doctor).specializations.includes(i)}/>)}
+                {Specialization.map((e, i) => <Checkbox key={e} name="specializations" value={i} label={e} defaultChecked={init && (init as Doctor).specializations.includes(i)}/>)}
             </div>
             
         </>
         case "diagnose": return <>
-            <Input type="text" name="Body" placeholder="Содержание" defaultValue={init && (init as Diagnose).body}/>
-            <Input type="date" name="Date" defaultValue={init && (init as Diagnose).date}/>
+            <Input type="text" name="body" placeholder="Содержание" defaultValue={init && (init as Diagnose).body}/>
+            <Input type="date" name="date" defaultValue={init && (init as Diagnose).date}/>
 
         </>
-        case "docdiagnose": return <>
-            <Input type="number" name="docID" placeholder="ID доктора" defaultValue={init && (init as DoctorDiagnose).docId}/>
-            <Input type="number" name="diagID" placeholder="ID диагноза" defaultValue={init && (init as DoctorDiagnose).diagId}/>
+        case "docdiagnose": 
+            return <>
+            {/* <Input type="number" name="docId" placeholder="ID доктора" defaultValue={init && (init as DoctorDiagnose).docId}/>
+            <Input type="number" name="diagId" placeholder="ID диагноза" defaultValue={init && (init as DoctorDiagnose).diagId}/> */}
+            <Select name="docId" table="doctor"/>
+            <Select name="diagId" table="diagnose"/>
         </>
     }
 }
@@ -48,7 +52,11 @@ export function getFormFields(t: Table, init?: Entity) {
 export function getFormData(e: FormData) {
     const data: PartialEntityRecord = {};
     for(let k of e.keys()) {
-        data[k as EntityFields] = e.get(k) as Exclude<FormDataEntryValue, File>
+        if (k == "specializations") {
+            data[k as EntityFields] = (e.getAll(k) as Exclude<FormDataEntryValue, File>[]).map(e => Number(e))
+        } else {
+            data[k as EntityFields] = e.get(k) as Exclude<FormDataEntryValue, File>
+        }
     }
     return data
 }
