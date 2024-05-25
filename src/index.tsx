@@ -6,6 +6,7 @@ import Init from './pages/Init';
 import Entities from './pages/Entities';
 import EditEntity from './pages/EditEntity';
 import Create from './pages/Create';
+import { SERVER_HOST, SERVER_PORT } from './shared';
 
 const router = createBrowserRouter([
     {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     {
         path: ":tableName",
         loader: async ({ params, request }) => {
-            const data = await fetch("http://localhost:5132/api/" + params.tableName + "s/")
+            const data = await fetch(SERVER_HOST + ":" + SERVER_PORT + "/api/" + params.tableName + "s/")
             return (await data.json()).result
         },
         element: <Entities/>,

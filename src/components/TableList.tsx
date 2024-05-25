@@ -1,5 +1,5 @@
 import { SelectHTMLAttributes, useEffect, useState } from 'react'
-import { Entity, Table, TableEnum } from '../shared'
+import { Entity, SERVER_HOST, SERVER_PORT, Table, TableEnum } from '../shared'
 
 interface TableListProps extends SelectHTMLAttributes<HTMLSelectElement> {
     table: Table
@@ -9,7 +9,7 @@ export default function TableList({ table, ...props }: TableListProps) {
     const [data, setData] = useState<Entity[]>()
     useEffect(() => {
         const get = async () => {
-            const res = await fetch("http://localhost:5132/api/" + table + "s/")
+            const res = await fetch(SERVER_HOST + ":" + SERVER_PORT + "/api/" + table + "s/")
             setData((await res.json()).result as Entity[])
         }
         get()

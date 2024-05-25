@@ -12,6 +12,8 @@ export enum TableEnum {
     "docdiagnose" = "Связь"
 }
 
+export const [SERVER_HOST, SERVER_PORT] = ["http://localhost", 5312]
+
 export type Table = "doctor" | "diagnose" | "docdiagnose"
 
 export type EntityArray = Doctor[] | Diagnose[] | DoctorDiagnose[]
