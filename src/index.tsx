@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     {
         path: ":tableName/:id",
         loader: async ({ params, request }) => {
-            const data = await fetch("http://localhost:5132/api/" + params.tableName + "s/id?id=" + params.id)
+            const data = await fetch(SERVER_HOST + ":" + SERVER_PORT + "/api/" + params.tableName + "s/id?id=" + params.id)
             return (await data.json())
         },
         element: <EditEntity/>
