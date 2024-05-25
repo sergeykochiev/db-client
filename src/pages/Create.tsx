@@ -14,7 +14,7 @@ export default function Create() {
         await fetch(SERVER_HOST + ":" + SERVER_PORT + "/api/" + table + "s/", { method: "POST", body: JSON.stringify(getFormData(fd)), headers: {
             "Content-Type": "application/json"
         }})
-        navigate("..")
+        navigate(-1)
     }
     return <Main heading={"Создать " + TableEnum[table]}>
         <Form onSubmit={create}>
